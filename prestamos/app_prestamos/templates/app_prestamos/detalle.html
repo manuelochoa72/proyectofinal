@@ -1,0 +1,42 @@
+<form action="{% url 'app_prestamos:agregar_prestamo' cliente.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ cliente.Nombre }}</h1></legend>
+        {% if mensaje_error %}
+            <p><strong>{{ mensaje_error }}</strong></p>
+        {% endif %}
+        <label>Monto de Prestamo </label> <input type="text" name="monto" >
+        <p></p>
+        <label>Numero de prestamo </label> <input type="text" name="num_prestamo" >
+        <p></p>
+        <label>Fecha de prestamo </label> <input type="text" name="fecha" >
+        <p></p>
+        <label>Interes </label> <input type="text" name="interes" >
+        <p></p>
+        <label>Total a Pagar </label> <input type="text" name="total_pago" value="0" >
+
+
+    </fieldset>
+    <input type="submit" valor="agregar_prestamo">
+</form>
+
+
+
+<!--
+<h1>{{ cliente.Nombre }}</h1>
+<ul> 
+    <! -- Select * from cliente join prestamo on cliente.id
+            where cliente.id=1 
+    {% for  prestamo  in cliente.prestamo_set.all %}
+        
+        <li> Numero de prestamo: {{   prestamo.num_prestamo }} </li>
+        <li> Monto del presramo: {{ prestamo.monto }}</li>
+        <li> Fecha de prestamo:  {{ prestamo.fecha }}</li>
+        <li> Interes: {{ prestamo.interes }} </li>
+        <li> Total a pagar: {{ prestamo.total_pago }}</li>
+        <p> </p>
+
+    {% endfor %}
+</ul>
+{{ cliente }}
+ -- >

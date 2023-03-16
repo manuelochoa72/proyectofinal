@@ -1,0 +1,9 @@
+{% if total_clientes %}
+    <ul>
+    {% for cliente in total_clientes %}
+        <li><a href="{% url 'app_prestamos:detalle' cliente.id %}">{{ cliente.Nombre }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay mas clientes</p>
+{% endif %}

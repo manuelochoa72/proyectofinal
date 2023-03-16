@@ -1,0 +1,17 @@
+<h1>{{ cliente.Nombre }}</h1>
+<ul> 
+    <!-- Select * from cliente join prestamo on cliente.id
+            where cliente.id= -->
+    {% for  prestamo  in cliente.prestamo_set.all %}
+        
+        <li> Numero de prestamo: {{   prestamo.num_prestamo }} </li>
+        <li> Monto del presramo: {{ prestamo.monto }}</li>
+        <li> Fecha de prestamo:  {{ prestamo.fecha }}</li>
+        <li> Interes: {{ prestamo.interes }} </li>
+        <li> Total a pagar: {{ prestamo.total_pago }}</li>
+        <p> </p>
+
+    {% endfor %}
+</ul>
+
+<a href="{% url 'app_prestamos:detalle' cliente.id %}"> agregar prestamo </a>
