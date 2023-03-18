@@ -19,8 +19,8 @@ class Prestamo(models.Model):
 
     
     def save(self, *args, **kwargs):
-        self.total_pago=self.monto*(1+(self.interes/100))
-        return super(Prestamo, self).save(*args, **kwargs)
+       self.total_pago=self.monto*(1+(self.interes/100))
+       return super(Prestamo, self).save(*args, **kwargs)
 
 
     def __str__(self) -> str:

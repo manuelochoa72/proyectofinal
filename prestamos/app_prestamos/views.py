@@ -48,11 +48,18 @@ def prestamos(request, id_cliente):
 def agregar_prestamo(request, id_cliente):
     cliente = get_object_or_404(Cliente, pk=id_cliente)
     try:
-        monto_seleccionado = Prestamo.objects.get(pk=request.POST["monto"])
-        num_prestamo_sel = Prestamo.objects.get(pk=request.POST["num_prestamo"]) 
-        fecha_seleccionada = Prestamo.objects.get(pk=request.POST["fecha"])
-        interes_seleccionado = Prestamo.objects.get(pk=request.POST["interes"])
-        total_pago_seleccionado = Prestamo.objects.get(pk=request.POST["total_pago"])
+        nuevo_prestamo=Prestamo()
+        nuevo_prestamo.cliente_fk= cliente
+        nuevo_prestamo.monto = float(request.POST["monto"])
+        nuevo_prestamo.num_prestamo = int(request.POST["num_prestamo"])
+        nuevo_prestamo.fecha = request.POST["fecha"]
+        nuevo_prestamo.interes = float(request.POST["interes"])
+        nuevo_prestamo.total_pago = float(request.POST["total_pago"])
+        #print(nuevo_prestamo.cliente)
+        #print(nuevo_prestamo.monto_seleccionado)
+        #print(nuevo_prestamo.interes_seleccionado)
+        #print(nuevo_prestamo.total_pago_seleccionado)
+
     except(KeyError, Prestamo.DoesNotExist):
         template_detalle = loader.get_template("app_prestamos/detalle.html")
         contexto = {
@@ -62,11 +69,8 @@ def agregar_prestamo(request, id_cliente):
         return HttpResponse(template_detalle.render(contexto, request))
     else: 
         
-        monto_seleccionado.save()
-        num_prestamo_sel.save()
-        fecha_seleccionada.save()
-        interes_seleccionado.save()
-        total_pago_seleccionado.save()
+        nuevo_prestamo.save()
+       
 
         return HttpResponseRedirect(reverse('app_prestamos:resultados', args=(cliente.id,)))
 
